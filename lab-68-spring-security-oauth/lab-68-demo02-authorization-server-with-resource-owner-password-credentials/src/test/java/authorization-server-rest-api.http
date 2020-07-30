@@ -1,0 +1,21 @@
+### 授权请求，客户端向授权服务器请求获取 访问令牌
+### Authorization: Basic base64encode(clientId + ":"+ clientSecret)
+POST http://localhost:8080/oauth/token?grant_type=password&username=yunai&password=1024
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic Y2xpZW50YXBwOjExMjIzMw==
+
+<> 2020-07-23T045004.200.json
+
+### 获取令牌信息，校验令牌的有效性，一般是资源服务器请求(这时可以把资源服务器理解成授权服务器的一个特殊的客户端)
+### Authorization: Basic base64encode(username+":"+password)
+POST http://localhost:8080/oauth/check_token?token=7a64c326-7149-47e9-ab4e-8e244efdde3e
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic Y2xpZW50YXBwOjExMjIzMw==
+
+<> 2020-07-23T045218.200.json
+
+###
+
+

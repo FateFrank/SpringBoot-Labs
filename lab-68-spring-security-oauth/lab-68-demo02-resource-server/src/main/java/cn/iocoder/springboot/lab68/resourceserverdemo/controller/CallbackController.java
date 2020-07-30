@@ -22,6 +22,15 @@ public class CallbackController {
     @Value("${security.oauth2.access-token-uri}")
     private String accessTokenUri;
 
+    /**
+     * 使用OAuth2RestTemplate对象来消耗OAuth2安全的REST服务(即 /oauth/token 接口)
+     *
+     * 提供 /callback 回调地址，在获取到授权码时，请求授权服务器，通过授权码获取访问令牌。
+     *
+     * 设置的回调地址，会校验和授权码绑定的回调地址是否相同
+     * @param code
+     * @return
+     */
     @GetMapping("/callback")
     public OAuth2AccessToken login(@RequestParam("code") String code) {
         // 创建 AuthorizationCodeResourceDetails 对象

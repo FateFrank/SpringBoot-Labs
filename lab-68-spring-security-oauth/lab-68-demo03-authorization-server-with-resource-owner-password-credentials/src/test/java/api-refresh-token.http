@@ -1,0 +1,19 @@
+### 密码模式获取访问令牌，会返回刷新令牌
+POST http://localhost:8080/oauth/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic Y2xpZW50YXBwOjExMjIzMw==
+
+grant_type=password&username=yunai&password=1024
+
+### 使用 "刷新令牌" 来刷新 "访问令牌"
+POST http://localhost:8080/oauth/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic Y2xpZW50YXBwOjExMjIzMw==
+
+grant_type=refresh_token&refresh_token=e0e1fe95-bfe2-43a5-b4ad-46d3ea00bbc8
+
+### 删除令牌
+POST http://localhost:8080/token/demo/revoke
+Content-Type: application/x-www-form-urlencoded
+
+token=169fc9d9-b6ae-4d4c-a28f-5fe295ebe238

@@ -47,7 +47,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                // 设置 /token/demo/revoke 无需授权
+                // 设置 /token/demo/revoke 删除令牌接口无需授权
                 .mvcMatchers("/token/demo/revoke").permitAll()
                 // 设置其它接口需要授权
                 .anyRequest().authenticated();

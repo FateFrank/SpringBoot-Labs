@@ -1,0 +1,26 @@
+### 认证请求，客户端访问授权服务器，
+### 未登录的话会被拦截到登录页面(这个页面可自定义，如QQ的三方登录页面)，输入账号密码，确认授权，这两步可以缓存，第二次进无需操作
+### 确认授权后，页面会重定向到回调地址，并将授权码作为传参，如 http://127.0.0.1:9090/callback&code=7BKgjq
+
+# client_id 参数，必传，为我们在 OAuth2AuthorizationServer 中配置的 Client 的编号。
+# redirect_uri 参数，可选，回调地址。当然，如果 client_id 对应的 Client 未配置 redirectUris 属性，会报错。
+# response_type 参数，必传，返回结果为 code 授权码。
+# scope 参数，可选，申请授权的 Scope 。如果多个，使用逗号分隔。
+# state 参数，可选，表示客户端的当前状态，可以指定任意值，授权服务器会原封不动地返回这个值。
+GET http://127.0.0.1:8080/oauth/authorize?client_id=clientapp&response_type=code&scope=read_userinfo
+Accept: */*
+Cache-Control: no-cache
+
+
+### 授权请求，客户端使用授权码向授权服务器请求获取访问令牌，一般在回调接口中封装调用此接口
+### 在之前获取授权码时，授权码已经和回调地址绑定了
+### 这里回调地址是必传参数，只用来校验和绑定授权码的回调地址是否相同
+### Authorization: Basic base64encode(clientId+":"+clientSecret)
+POST http://localhost:8080/oauth/token?grant_type=authorization_code&redirect_uri=http://127.0.0.1:9090/callback&code=7BKgjq
+Accept: */*
+Cache-Control: no-cache
+Authorization: Basic Y2xpZW50YXBwOjExMjIzMw==
+
+
+
+

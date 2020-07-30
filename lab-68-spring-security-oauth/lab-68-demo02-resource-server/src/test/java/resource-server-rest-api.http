@@ -1,0 +1,26 @@
+### 普通资源请求，需要提供正确的令牌，会调用配置文件中的 token-info-uri 来校验令牌的有效性
+GET http://localhost:9090/api/example/hello
+Accept: */*
+Cache-Control: no-cache
+Authorization: bearer 7a64c326-7149-47e9-ab4e-8e244efdde3e
+
+
+### 密码模式，获取访问令牌，需要提供用户名和密码
+POST http://localhost:9090/login?username=yunai&password=1024
+Accept: */*
+Cache-Control: no-cache
+
+### 授权码模式，获取访问令牌，需要提供授权码(授权码是一次性的)
+POST http://localhost:9090/callback?code=
+Accept: */*
+Cache-Control: no-cache
+
+### 简化模式，获取访问令牌(这个不通)
+POST http://localhost:9090/callback2
+Accept: */*
+Cache-Control: no-cache
+
+### 客户端模式，获取访问令牌
+POST http://localhost:9090/client-login
+Accept: */*
+Cache-Control: no-cache

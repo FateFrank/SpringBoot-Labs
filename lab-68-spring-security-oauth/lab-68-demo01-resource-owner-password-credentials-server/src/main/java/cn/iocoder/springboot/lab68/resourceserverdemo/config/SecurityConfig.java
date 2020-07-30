@@ -34,13 +34,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 配置 yunai 用户
                 .withUser("yunai").password("1024").roles("USER");
     }
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http.authorizeRequests()
-//                // 对所有 URL 都进行认证
-//                .anyRequest()
-//                .authenticated();
-//    }
-
 }

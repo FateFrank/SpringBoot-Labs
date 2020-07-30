@@ -24,7 +24,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     private AuthenticationManager authenticationManager;
 
     /**
-     * 用户详情 Service
+     * 用户详情 Service (SecurityConfig 提供)
      */
     @Autowired
     private UserDetailsService userDetailsService;
@@ -32,7 +32,7 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
-            .userDetailsService(userDetailsService)
+            .userDetailsService(userDetailsService) // 如果不进行 UserDetailsService 的设置，在使用刷新令牌获取新的访问令牌时，会抛出异常。
         ;
     }
 

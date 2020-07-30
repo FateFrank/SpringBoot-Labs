@@ -32,17 +32,31 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
+    /**
+     * Spring Security OAuth 提供的基于 Redis 的令牌存储器
+     * @return
+     */
     @Bean
     public TokenStore redisTokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
     }
 
+    /**
+     * 配置授权（authorization）以及令牌（token）的访问端点和令牌服务(token services)。
+     * @param endpoints
+     * @throws Exception
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
             .tokenStore(redisTokenStore());
     }
 
+    /**
+     * 配置令牌端点(Token Endpoint)的安全约束
+     * @param oauthServer
+     * @throws Exception
+     */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer.checkTokenAccess("isAuthenticated()");
@@ -52,6 +66,13 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 //                .checkTokenAccess("permitAll()");
     }
 
+    /**
+     * 配置客户端详情服务
+     *
+     * 客户端详情信息在这里进行初始化，你能够把客户端详情信息写死在这里或者是通过数据库来存储调取详情信息。
+     * @param clients
+     * @throws Exception
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()

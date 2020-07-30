@@ -38,13 +38,8 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 实现对 Spring Security 的自动配置 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--        </dependency>-->
-
         <!-- 实现对 Spring Security OAuth2 的自动配置 -->
+        <!-- 这个依赖引入 Spring Security OAuth 并实现自动配置。同时，它也引入了 Spring Security 依赖 -->
         <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>

@@ -17,6 +17,11 @@ public class TokenDemoController {
     @Autowired
     private ConsumerTokenServices tokenServices;
 
+    /**
+     * 调用 ConsumerTokenServices 的 #revokeToken(String tokenValue) 方法，删除访问令牌和刷新令牌
+     * @param token
+     * @return
+     */
     @PostMapping(value = "/revoke")
     public boolean revokeToken(@RequestParam("token") String token) {
         return tokenServices.revokeToken(token);

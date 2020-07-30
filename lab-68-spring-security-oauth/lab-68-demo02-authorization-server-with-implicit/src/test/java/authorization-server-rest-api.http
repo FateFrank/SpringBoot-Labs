@@ -1,0 +1,19 @@
+### 认证请求，客户端访问授权服务器，
+### 未登录的话会被拦截到登录页面(这个页面可自定义，如QQ的三方登录页面)，输入账号密码，确认授权，这两步可以缓存，第二次进无需操作
+### 确认授权后，页面会重定向到回调地址，并将token信息放到url的hash部分，如 http://http://127.0.0.1:9090/callback02#access_token=bd97a146-59ba-437e-baeb-95d02510b502&token_type=bearer&expires_in=42691
+### 后续，可以通过编写 Javascript 脚本的代码，获取 URI 上的 Hash 部分的访问令牌。
+
+# client_id 参数，必传，为我们在 OAuth2AuthorizationServer 中配置的 Client 的编号。
+# redirect_uri 参数，可选，回调地址。当然，如果 client_id 对应的 Client 未配置 redirectUris 属性，会报错。
+# response_type 参数，必传，返回结果为 token 访问令牌。
+# scope 参数，可选，申请授权的 Scope 。如果多个，使用逗号分隔。
+# state 参数，可选，表示客户端的当前状态，可以指定任意值，授权服务器会原封不动地返回这个值。
+GET http://127.0.0.1:8080/oauth/authorize?client_id=clientapp&response_type=token&scope=read_userinfo
+Accept: */*
+Cache-Control: no-cache
+
+
+
+
+
+

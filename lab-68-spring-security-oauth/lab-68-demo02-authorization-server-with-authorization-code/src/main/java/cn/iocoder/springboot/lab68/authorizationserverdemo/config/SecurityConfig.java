@@ -9,6 +9,11 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
+/**
+ * Spring Security 提供认证功能
+ *
+ * 创建 AuthenticationManager 对象
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -34,16 +39,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // 配置 yunai 用户
                 .withUser("yunai").password("1024").roles("USER");
     }
-
-//    @Override
-//    protected void configure(HttpSecurity http) throws Exception {
-//        http
-//                .authorizeRequests()
-//                .antMatchers("/oauth/**").permitAll() // 允许无权限访问
-//                .anyRequest().authenticated()
-//                .and()
-//                .formLogin().and()
-//                .httpBasic();
-//    }
-
 }
