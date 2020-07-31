@@ -1,0 +1,7 @@
+POST http://localhost:8080/oauth/token
+Content-Type: application/x-www-form-urlencoded
+Authorization: Basic Y2xpZW50YXBwOjExMjIzMw==
+
+grant_type=password&username=yunai&password=112233
+
+###

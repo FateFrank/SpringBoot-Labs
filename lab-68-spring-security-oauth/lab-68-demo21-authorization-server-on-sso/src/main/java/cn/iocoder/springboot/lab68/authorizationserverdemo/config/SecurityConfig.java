@@ -33,6 +33,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return (NoOpPasswordEncoder) NoOpPasswordEncoder.getInstance();
     }
 
+    /**
+     * 如果想自定义用户的读取，参考 http://www.iocoder.cn/Spring-Boot/Spring-Security/?self
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()

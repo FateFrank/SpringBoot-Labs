@@ -35,17 +35,31 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
     @Autowired
     private DataSource dataSource;
 
+    /**
+     * Spring Security OAuth 提供的基于 Jdbc 的令牌存储器
+     * @return
+     */
     @Bean
     public TokenStore jdbcTokenStore() {
         return new JdbcTokenStore(dataSource);
     }
 
+    /**
+     * 配置授权（authorization）以及令牌（token）的访问端点和令牌服务(token services)。
+     * @param endpoints
+     * @throws Exception
+     */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints.authenticationManager(authenticationManager)
                 .tokenStore(jdbcTokenStore());
     }
 
+    /**
+     * 配置令牌端点(Token Endpoint)的安全约束
+     * @param oauthServer
+     * @throws Exception
+     */
     @Override
     public void configure(AuthorizationServerSecurityConfigurer oauthServer) throws Exception {
         oauthServer.checkTokenAccess("isAuthenticated()");
@@ -55,11 +69,21 @@ public class OAuth2AuthorizationServerConfig extends AuthorizationServerConfigur
 //                .checkTokenAccess("permitAll()");
     }
 
+    /**
+     * 创建 JdbcClientDetailsService
+     * @return
+     */
     @Bean
     public ClientDetailsService jdbcClientDetailsService() {
         return new JdbcClientDetailsService(dataSource);
     }
 
+    /**
+     * 进行 client 客户端的配置
+     * 使用 JdbcClientDetailsService 进行【客户端】的读写
+     * @param clients
+     * @throws Exception
+     */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.withClientDetails(jdbcClientDetailsService());

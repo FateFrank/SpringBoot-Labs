@@ -11,8 +11,37 @@ security:
     client:
       client-id: clientapp
       client-secret: 112233
-      user-authorization-uri: http://127.0.0.1:8080/oauth/authorize # 获取用户的授权码地址
-      access-token-uri: http://127.0.0.1:8080/oauth/token # 获取访问令牌的地址
+      user-authorization-uri: http://127.0.0.1:8080/oauth/authorize     # 获取用户的授权码地址
+      access-token-uri: http://127.0.0.1:8080/oauth/token               # 获取访问令牌的地址
     # OAuth2 Resource 配置，对应 ResourceServerProperties 类
     resource:
-      token-info-uri: http://127.0.0.1:8080/oauth/check_token # 校验访问令牌是否有效的地址
+      token-info-uri: http://127.0.0.1:8080/oauth/check_token           # 校验访问令牌是否有效的地址
+
+
+#  ① server.servlet.session.cookie.name 配置项，自定义 Session 的 Cookie 名字，防止冲突。冲突后，会导致 SSO 登录失败。
+#
+#     友情提示：具体的值，胖友可以根据自己的喜欢设置。
+#
+#  ② security.oauth2.client 配置项，OAuth2 Client 配置，对应 OAuth2ClientProperties 类。
+
+#     在这个配置项中，我们添加了客户端的 client-id 和 client-secret。
+#
+#  ③ security.oauth2.client.user-authorization-uri 配置项，获取用户的授权码地址。
+#
+#     在访问 XXX 系统需要登录的地址时，Spring Security OAuth 会自动跳转到统一登录系统，进行统一登录获取授权。
+#
+#     而这里配置的 security.oauth2.client.user-authorization-uri 地址，就是之前授权服务器的 oauth/authorize 接口，可以进行授权码模式的授权。
+#
+#  ④ security.oauth2.client.access-token-uri 配置项，获取访问令牌的地址。
+#
+#     在统一登录系统完成统一登录并授权后，浏览器会跳转回 XXX 系统的回调地址。
+#
+#     在该地址上，会调用统一登录系统的 security.oauth2.client.access-token-uri 地址，通过授权码获取到访问令牌。
+#
+#     而这里配置的 security.oauth2.client.access-token-uri 地址，就是之前授权服务器的 oauth/token 接口。
+#
+#  ⑤ security.oauth2.resource.client.token-info-uri 配置项，校验访问令牌是否有效的地址。
+#
+#     在获取到访问令牌之后，每次请求 XXX 系统时，都会调用 统一登录系统的 security.oauth2.resource.client.token-info-uri 地址，校验访问令牌的有效性，同时返回用户的基本信息。
+#
+#     而这里配置的 security.oauth2.resource.client.token-info-uri 地址，就是之前授权服务器的 oauth/check_token 接口。

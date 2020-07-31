@@ -38,13 +38,8 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- 实现对 Spring Security 的自动配置 -->
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--        </dependency>-->
-
         <!-- 实现对 Spring Security OAuth2 的自动配置 -->
+        <!-- 包含 Spring Security 和 OAuth2 的 jar 包 -->
         <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
@@ -56,7 +51,9 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
-        <dependency> <!-- 本示例，我们使用 MySQL -->
+
+        <!-- MySQL 连接驱动 -->
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.48</version>
